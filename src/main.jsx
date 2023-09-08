@@ -16,11 +16,13 @@ import EditContact from "./routes/edit";
 import { action as destroyAction } from "./routes/destroy";
 import Index from "./routes";
 
-//* data res
+// data res
 import DataRes from "./components/routes/dataRes";
 import DataEditComponent from "./components/routes/dataEdit";
-//* private
+
+// private
 import RequireAuth from "./auth/RequireAuth";
+import { fakeAuthProvider } from "./auth/auth";
 import RegisterAndLogin from "./auth/RegisterAndLogin";
 
 const router = createBrowserRouter([
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
       </RequireAuth>
     ),
     errorElement: <ErrorPage />,
-    //* call và load data từ bên contact
+    // call và load data từ bên contact
     loader: rootLoader,
     action: rootAction,
     children: [
@@ -66,30 +68,31 @@ const router = createBrowserRouter([
     path: "/login",
     element: <RegisterAndLogin />,
   },
-  {
-    path: "/hello",
-    element: <>test sample</>,
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
 
-let AuthContext = React.createClass(null);
+let AuthContext = React.createContext(null);
 
 export const useAuth = () => {
   return React.useContext(AuthContext);
 };
 
 function AuthProvider({ children }) {
-  let [user, setUser] = React.userState(null);
+  // user kieem tra xem nguoi dung login chua
+  let [user, setUser] = React.useState(null);
 
-  let sigin = (newUser, callback) => {
-    return fakeAuthProvider.sigin(() => {
-      setUser(newUser);
+  let signin = (newUser, callback) => {
+    return fakeAuthProvider.signin(() => {
+      setUser(newUser.user.email);
+      localStorage.setItem("tokenUser", newUser._tokenResponse.idToken);
+      localStorage.setItem("user", newUser.user.email);
       callback;
     });
   };
@@ -97,10 +100,12 @@ function AuthProvider({ children }) {
   let signout = (callback) => {
     return fakeAuthProvider.signout(() => {
       setUser(null);
+      localStorage.clear();
       callback;
     });
   };
 
-  let value = { user, sigin, signout };
+  let value = { user, signin, signout };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
