@@ -2,17 +2,20 @@
  * This represents some generic auth provider API, like Firebase.
  */
 const fakeAuthProvider = {
-  //! Kiểm tra xem trạng thái ng dùng đã đăng nhập chưa
+  // kiêm tra xem trạng thái người dùng đã đăng nhập chưa
   isAuthenticated: false,
-  //! function signIn khi ng dùng click login
+
+  // function signin khi người dùng click nut login
   signin(callback) {
-    //! set lại giá trị isAuthenticated là true
+    // set lại giá trị isAuthenticated là true
     fakeAuthProvider.isAuthenticated = true;
     setTimeout(callback, 100); // fake async
   },
-  //! function signOut khi ng dùng click signout
+
+  // function signout khi người dùng click signout
   signout(callback) {
     fakeAuthProvider.isAuthenticated = false;
+    setTimeout(callback, 100); // fake async
   },
 };
 

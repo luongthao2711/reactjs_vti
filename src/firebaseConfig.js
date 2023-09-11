@@ -16,9 +16,10 @@ const firebaseConfig = {
   measurementId: "G-MF159HRRWL",
 };
 
-//* Initialize Firebase
+// Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 
-//* Initialize Firebase Authentication and get a reference to the service
+// Initialize Firebase Authentication and get a reference to the service
 export const database = getAuth(app);
-export const analytics = getAnalytics(app);
+
+const analytics = getAnalytics(app);
