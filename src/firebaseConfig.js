@@ -1,24 +1,25 @@
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// // TODO: Add SDKs for Firebase products that you want to use
-// // https://firebase.google.com/docs/web/setup#available-libraries
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 
-// // Your web app's Firebase configuration
-// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCJaFPtqQon4IpURSEVLBTAgJimgFZHRQ0",
-//   authDomain: "reactjsra66.firebaseapp.com",
-//   projectId: "reactjsra66",
-//   storageBucket: "reactjsra66.appspot.com",
-//   messagingSenderId: "370269683106",
-//   appId: "1:370269683106:web:bcb28ee27d36a62038c6fb",
-//   measurementId: "G-T2ENMHCB2L",
-// };
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAD3ptL1WFyFjmGvHL4sre90mMjrjer6C4",
+  authDomain: "projectfinal-3788a.firebaseapp.com",
+  projectId: "projectfinal-3788a",
+  storageBucket: "projectfinal-3788a.appspot.com",
+  messagingSenderId: "627070270212",
+  appId: "1:627070270212:web:3e14a8d79fe0e245f16e51",
+  measurementId: "G-T7DCTS4WJ0",
+};
 // //* Initialize Firebase
-// export const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
 // //* Initialize Firebase Authentication and get a reference to the service
-// export const database = getAuth(app);
-// export const analytics = getAnalytics(app);
+export const database = getAuth(app);
+export const analytics = getAnalytics(app);

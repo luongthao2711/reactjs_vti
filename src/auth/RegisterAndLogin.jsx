@@ -16,7 +16,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-// import { database } from "../firebaseConfig";
+import { database } from "./../firebaseConfig";
 import { useAuth } from "./../main";
 
 function RegisterAndLogin() {

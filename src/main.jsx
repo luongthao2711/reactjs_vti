@@ -10,6 +10,7 @@ import ErrorPage from "./pages/error-page";
 import Contact, { loader as contactLoader } from "./routes/contact";
 
 import { action as editAction } from "./routes/edit";
+import { action as postAction } from "./routes/create";
 
 import EditContact from "./routes/edit";
 
@@ -19,11 +20,13 @@ import Index from "./routes";
 // data res
 import DataRes from "./components/routes/dataRes";
 import DataEditComponent from "./components/routes/dataEdit";
+import DataCreateComponent from "./components/routes/dataCreate";
 
 // private
 import RequireAuth from "./auth/RequireAuth";
 import { fakeAuthProvider } from "./auth/auth";
 import RegisterAndLogin from "./auth/RegisterAndLogin";
+import CreateContact from "./routes/create";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +54,12 @@ const router = createBrowserRouter([
         action: editAction,
       },
       {
+        path: "contacts/postContact",
+        element: <CreateContact />,
+        loader: contactLoader,
+        action: postAction,
+      },
+      {
         path: "contacts/:contactId/destroy",
         action: destroyAction,
       },
@@ -61,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "data/dataDeatail/:dataId",
         element: <DataEditComponent />,
+      },
+      {
+        path: "data/dataCreate",
+        element: <DataCreateComponent />,
       },
     ],
   },
