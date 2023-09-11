@@ -23,9 +23,9 @@ export default function RequireAuth({ children }) {
 {
   /* <COMPonenta>
 
-    // children
-    <componentcon1></componentcon1>
-    <componentcon1></componentcon1>
-    <componentcon1></componentcon1>
+  // children
+  <componentcon1></componentcon1>
+  <componentcon1></componentcon1>
+  <componentcon1></componentcon1>
 </COMPonenta> */
 }
