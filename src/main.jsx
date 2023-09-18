@@ -10,9 +10,11 @@ import ErrorPage from "./pages/error-page";
 import Contact, { loader as contactLoader } from "./routes/contact";
 
 import { action as editAction } from "./routes/edit";
+
 import { action as postAction } from "./routes/create";
 
 import EditContact from "./routes/edit";
+import CreateContact from "./routes/create";
 
 import { action as destroyAction } from "./routes/destroy";
 import Index from "./routes";
@@ -20,13 +22,16 @@ import Index from "./routes";
 // data res
 import DataRes from "./components/routes/dataRes";
 import DataEditComponent from "./components/routes/dataEdit";
-import DataCreateComponent from "./components/routes/dataCreate";
 
 // private
 import RequireAuth from "./auth/RequireAuth";
 import { fakeAuthProvider } from "./auth/auth";
 import RegisterAndLogin from "./auth/RegisterAndLogin";
-import CreateContact from "./routes/create";
+import DataCreateComponent from "./components/routes/dataCreate";
+
+// import redux
+import store from "./store";
+import { Provider } from "react-redux";
 
 const router = createBrowserRouter([
   {
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
         element: <DataEditComponent />,
       },
       {
-        path: "data/dataCreate",
+        path: "dataCreate",
         element: <DataCreateComponent />,
       },
     ],
@@ -85,9 +90,13 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    {/* redux */}
+    <Provider store={store}>
+      {/* context api */}
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </Provider>
   </React.StrictMode>
 );
 

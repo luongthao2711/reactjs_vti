@@ -23,24 +23,19 @@ export default function CreateContact() {
           aria-label="First name"
           type="text"
           name="first"
-          defaultValue={contact.first}
+          defaultValue=""
         />
         <input
           placeholder="Last"
           aria-label="Last name"
           type="text"
           name="last"
-          defaultValue={contact.last}
+          defaultValue=""
         />
       </p>
       <label>
         <span>Twitter</span>
-        <input
-          type="text"
-          name="twitter"
-          placeholder="@jack"
-          defaultValue={contact.twitter}
-        />
+        <input type="text" name="twitter" placeholder="@jack" defaultValue="" />
       </label>
       <label>
         <span>Avatar URL</span>
@@ -54,7 +49,7 @@ export default function CreateContact() {
       </label>
       <label>
         <span>Notes</span>
-        <textarea name="notes" defaultValue={contact.notes} rows={6} />
+        <textarea name="notes" defaultValue="" rows={6} />
       </label>
       <p>
         <button type="submit">Save</button>

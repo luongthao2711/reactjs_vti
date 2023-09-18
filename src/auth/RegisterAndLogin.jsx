@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import { Card, Space, Row, Col } from "antd";
 
-import "./app.css";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -64,37 +63,45 @@ function RegisterAndLogin() {
   };
 
   return (
-    <Space direction="vertical" size={16}>
-      <Card extra={<a href="#">More</a>} style={{ width: 300 }}>
-        <div className="App">
-          {/* Registration and login Screen */}
-          <div className="row">
-            <div
-              className={login == false ? "activeColor" : "pointer"}
-              onClick={() => setLogin(false)}
-            >
-              SignUp
+    <Row>
+      <Col span={16}></Col>
+
+      <Col span={10}>
+        <Space direction="vertical" size={16}>
+          <Card extra={<a href="#">More</a>}>
+            <div className="">
+              {/* Registration and login Screen */}
+              <div className="row">
+                <div
+                  className={login == false ? "activeColor" : "pointer"}
+                  onClick={() => setLogin(false)}
+                >
+                  SignUp
+                </div>
+                <div
+                  className={login == true ? "activeColor" : "pointer"}
+                  onClick={() => setLogin(true)}
+                >
+                  SignIn
+                </div>
+              </div>
+              <h1>{login ? "SignIn" : "SignUp"}</h1>
+              <form
+                onSubmit={(e) => handleSubmit(e, login ? "signin" : "signup")}
+              >
+                <input name="email" placeholder="Email" />
+                <br />
+                <input name="password" type="text" placeholder="Password" />
+                <br />
+                <p onClick={handleReset}>Forgot Password?</p>
+                <br />
+                <button>{login ? "SignIn" : "SignUp"}</button>
+              </form>
             </div>
-            <div
-              className={login == true ? "activeColor" : "pointer"}
-              onClick={() => setLogin(true)}
-            >
-              SignIn
-            </div>
-          </div>
-          <h1>{login ? "SignIn" : "SignUp"}</h1>
-          <form onSubmit={(e) => handleSubmit(e, login ? "signin" : "signup")}>
-            <input name="email" placeholder="Email" />
-            <br />
-            <input name="password" type="text" placeholder="Password" />
-            <br />
-            <p onClick={handleReset}>Forgot Password?</p>
-            <br />
-            <button>{login ? "SignIn" : "SignUp"}</button>
-          </form>
-        </div>
-      </Card>
-    </Space>
+          </Card>
+        </Space>
+      </Col>
+    </Row>
   );
 }
 

@@ -6,12 +6,24 @@ import {
   redirect,
   NavLink,
   useNavigation,
+  useNavigate,
 } from "react-router-dom";
 import { getContacts, createContact } from "../contacts";
 
 import React, { useMemo } from "react";
 
 import { useAuth } from "./../main";
+
+import { useSelector } from "react-redux";
+
+import {
+  HomeOutlined,
+  LoadingOutlined,
+  SettingFilled,
+  SmileOutlined,
+  SyncOutlined,
+  AppstoreAddOutlined,
+} from "@ant-design/icons";
 
 export async function loader() {
   const contacts = await getContacts();
@@ -42,20 +54,23 @@ export default function Root() {
   );
 
   // kiêm tra xem đã điều hướng loading được dữ liệu lên hết chưa
-  const navigation = useNavigation();
+  const navigate = useNavigate();
   console.log("authStore", authStore);
-  const user = localStorage.getItem("user");
+  //const user = localStorage.getItem('user');
 
   const logout = () => {
-    authStore.signout();
-    navigation("/");
+    authStore?.signout();
+    navigate("/");
   };
+
+  // lay ra gia tri tu store
+  const bg = useSelector((state) => state.bg.backgroundColor);
 
   return (
     <Context.Provider value={contextValue}>
       <div id="sidebar">
         <h1 onClick={() => logout()}>Logout</h1>
-        <div>
+        <div className={bg}>
           <form id="search-form" role="search">
             <input
               id="q"
@@ -71,17 +86,30 @@ export default function Root() {
             <button type="submit">New</button>
           </Form>
         </div>
-        <div className="data-res">
-          <h5>{user ? `Xin chao ${user} !` : ""}</h5>
-        </div>
+        {/* <div className="data-res">
+          <h5>{user ? `Xin chao ${user} !` : ''}</h5>
+        </div> */}
         <div className="data-res">
           <h4 style={{ color: "blue" }}>
-            <NavLink to={`data`}>click me send data</NavLink>
+            <NavLink to={`data`}>
+              click me send data
+              <SettingFilled />
+              <SmileOutlined />
+            </NavLink>
           </h4>
         </div>
         <div className="data-res">
           <h4 style={{ color: "blue" }}>
-            <NavLink to={`dataCreate`}>click me create new data</NavLink>
+            <Link to={""}>
+              Home Page <HomeOutlined />
+            </Link>
+          </h4>
+        </div>
+        <div className="data-res">
+          <h4 style={{ color: "blue" }}>
+            <NavLink to={`dataCreate`}>
+              add Me <AppstoreAddOutlined />
+            </NavLink>
           </h4>
         </div>
         <nav>

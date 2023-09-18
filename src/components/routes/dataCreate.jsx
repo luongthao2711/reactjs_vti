@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 import { ContextValue } from "./contextValue";
+
 export default function DataCreateComponent() {
   const [contact, setContact] = useState({
     name: "",

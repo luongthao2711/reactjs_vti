@@ -8,6 +8,10 @@ import axios, { isCancel, AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { envApi } from "../../routes/environtment";
+import { useSelector, useDispatch } from "react-redux";
+import { updateText } from "./../../counter/counterSlice";
+import { updateBg } from "./../../counter/bgslice";
+
 export default function DataComponent() {
   // data list user
   const [data, setData] = useState([]);
@@ -20,6 +24,27 @@ export default function DataComponent() {
 
   // show item
   const [itemInfo, setItemInfo] = useState(null);
+
+  const [value, setValue] = useState("");
+
+  // khai bao store va lay du lieu tu store
+  // lay ra gia tri tu store
+  const count = useSelector((state) => state.counter.nameContact);
+  // lay ra hanh dong tang giam, value
+  const dispatch = useDispatch();
+
+  const handleUpdateStore = (e) => {
+    console.log(value, "adda");
+    dispatch(updateText(value));
+  };
+
+  const handleBg = () => {
+    dispatch(updateBg("green"));
+  };
+
+  const handleBg2 = () => {
+    dispatch(updateBg("red"));
+  };
 
   useEffect(() => {
     callapi();
@@ -135,6 +160,24 @@ export default function DataComponent() {
         <p>{itemInfo?.name}</p>
         <p>{itemInfo?.phone}</p>
         <p>Some contents...</p>
+        <span> this is state of Store : {count}</span>
+        <form>
+          <input
+            name="name"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button type="button" onClick={(e) => handleUpdateStore(e)}>
+            handle click
+          </button>
+        </form>
+
+        <button type="button" onClick={(e) => handleBg(e)}>
+          change Color green
+        </button>
+        <button type="button" onClick={(e) => handleBg2(e)}>
+          change Color red
+        </button>
       </Modal>
 
       <Modal
